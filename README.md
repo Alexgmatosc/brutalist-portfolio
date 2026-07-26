@@ -1,46 +1,51 @@
-# Astro Starter Kit: Basics
+# SYSTEM LOG: BRUTALIST PORTFOLIO [V 4.0.9]
 
-```sh
-npm create astro@latest -- --template basics
+> **STATUS:** ONLINE  
+> **DESIGN PROTOCOL:** CYBERPUNK BRUTALISM  
+> **OBJECTIVE:** BEYOND AESTHETICS. PURE FUNCTIONALITY.
+
+A personal portfolio built with a strict brutalist and cyberpunk design language. Designed to break the standard mold of generic web portfolios, this project treats the browser as a raw terminal. It merges my two core disciplines: Web Development and UX Design.
+
+## 🛠 TECH STACK
+
+- **Framework:** [Astro](https://astro.build/) - For ultra-fast static site generation.
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) - Raw utility classes. No bloat.
+- **Languages:** TypeScript & HTML.
+- **i18n:** Native Astro internationalization (ES & EN).
+- **Typography:** JetBrains Mono, Space Mono, Playfair Display, Pirata One.
+
+## ⚙️ INICIAR SECUENCIA (RUN LOCALLY)
+
+Clone the repository and install dependencies to spin up the local server:
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/Alexgmatosc/brutalist-portfolio.git
+
+# 2. Enter directory
+cd brutalist-portfolio
+
+# 3. Install dependencies
+npm install
+
+# 4. Start local dev server
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Your terminal will provide the localhost port (usually `http://localhost:4321/`).
 
-## 🚀 Project Structure
+## 📁 ARCHITECTURE / DATA
 
-Inside of your Astro project, you'll see the following folders and files:
+The portfolio follows a DRY approach for its internationalization. All text and data are centralized and managed from:
+`src/data/portfolioData.ts`
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+To edit the bio, skills, or any text on the site, simply modify this file. The `Home.astro` component will automatically inject the correct language (`/` for ES, `/en/` for EN).
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 📡 DYNAMIC ROUTES
 
-## 🧞 Commands
+- **DEV Projects:** The `/dev/` route connects to the GitHub API to dynamically fetch repository data and README files.
+- **UX Projects:** The `/ux/` route connects to the Medium RSS feed to dynamically render UX case studies and articles.
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+**AUTHOR:** Alexander Matos  
+**LICENSE:** MIT
