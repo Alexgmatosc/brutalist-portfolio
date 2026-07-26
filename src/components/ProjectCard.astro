@@ -1,0 +1,53 @@
+---
+export interface Props {
+    title: string;
+    description: string;
+    languages: string[];
+    repoUrl: string;
+    repoId: string;
+}
+
+const { title, description, languages, repoUrl, repoId } = Astro.props;
+---
+<li class="list-none w-full relative group">
+    <div class="group relative bg-background flex flex-col hover:-translate-y-2 hover:translate-x-2 transition-transform">
+        <!-- Acid glitch hover effect -->
+        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity scanlines z-0"></div>
+        
+        <!-- Top Header Bar -->
+        <div class="bg-primary text-background flex justify-between items-center p-3 font-mono-label relative z-20">
+            <span>PRJ_{repoId}</span>
+            <span class="material-symbols-outlined">folder_open</span>
+        </div>
+
+        <div class="p-6 sm:p-8 flex-grow flex flex-col relative z-10">
+            <!-- Cyberpunk Decorations -->
+            <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-primary/40 pointer-events-none"></div>
+            <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-primary/40 pointer-events-none"></div>
+            <div class="absolute -bottom-3 -right-3 bg-background text-primary font-mono-label px-2 py-1 text-xs border-2 border-primary z-20">SYS_OK</div>
+            <div class="absolute top-1/2 left-2 -translate-y-1/2 text-[10px] font-mono-label text-primary/40 rotate-180" style="writing-mode: vertical-rl;">// {repoId} //</div>
+
+            <h3 class="font-headline-lg text-2xl md:text-3xl uppercase mb-6 text-on-surface tracking-tight">
+                {title}
+            </h3>
+            
+            <div class="bg-background border border-primary/30 p-4 mb-6 flex-grow">
+                <p class="font-code-body text-base text-on-surface leading-relaxed">
+                    {description || 'No description provided.'}
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mb-8">
+                {languages.map(lang => (
+                    <span class="text-sm font-mono-label bg-background border-2 border-primary px-3 py-1 text-on-surface uppercase">{lang}</span>
+                ))}
+            </div>
+            
+            <a href={repoUrl} class="w-full relative overflow-hidden bg-background text-on-surface border-t-2 border-primary/30 font-mono-label py-4 uppercase transition-colors block text-center text-lg group-hover:bg-primary group-hover:text-background">
+                <span class="relative z-10 flex items-center justify-center gap-2">
+                    LEER DOCUMENTACIÓN <span class="material-symbols-outlined text-base">arrow_forward_ios</span>
+                </span>
+            </a>
+        </div>
+    </div>
+</li>

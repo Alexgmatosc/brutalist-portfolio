@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+    let repos = [];
+    const token = import.meta.env.GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+    const headers = token 
+        ? { 'Authorization': `Bearer ${token}` } 
+        : {};
+    try {
+        const res = await fetch('https://api.github.com/users/Alexgmatosc/repos?sort=updated&per_page=6', { headers });
+        if (res.ok) {
+            repos = await res.json();
+        } else {
+            repos = [
+                { name: 'growee-app', description: 'Sistema automatizado de cuidado de plantas.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/growee-app', stargazers_count: 12, forks_count: 3 },
+                { name: 'brutalist-portfolio', description: 'Portafolio personal con temática cyberpunk y brutalista.', language: 'Astro', html_url: 'https://github.com/Alexgmatosc/brutalist-portfolio', stargazers_count: 45, forks_count: 8 },
+                { name: 'terminal-cli', description: 'Interfaz de línea de comandos experimental.', language: 'Go', html_url: 'https://github.com/Alexgmatosc/terminal-cli', stargazers_count: 5, forks_count: 1 }
+            ];
+        }
+    } catch (e) {
+        console.error("Error fetching repos", e);
+        repos = [
+            { name: 'growee-app', description: 'Sistema automatizado de cuidado de plantas.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/growee-app', stargazers_count: 0, forks_count: 0 }
+        ];
+    }
+
+    const paths = await Promise.all(repos.map(async (repo) => {
+        let readme = '';
+        try {
+            const res = await fetch(`https://raw.githubusercontent.com/Alexgmatosc/${repo.name}/main/README.md`, { headers });
+            if (res.ok) {
+                readme = await res.text();
+            } else {
+                const resMaster = await fetch(`https://raw.githubusercontent.com/Alexgmatosc/${repo.name}/master/README.md`, { headers });
+                if (resMaster.ok) {
+                    readme = await resMaster.text();
+                } else {
+                    readme = '# No README found.\n\nSorry, there is no README for this repository.';
+                }
+            }
+        } catch (e) {
+            console.error("Error fetching README", e);
+            readme = '# Error fetching README.';
+        }
+
+        return {
+            params: { repo: repo.name },
+            props: { repo, readme: marked.parse(readme) }
+        };
+    }));
+
+    return paths;
+}
+
+const { repo, readme } = Astro.props;
+---
+
+<Layout>
+    <main class="w-full pt-20 min-h-screen">
+        <div class="max-w-[1000px] mx-auto px-gutter py-12">
+            
+            <a href="/" class="inline-flex items-center gap-2 font-mono-label text-primary hover:text-on-surface transition-colors mb-8 group">
+                <span class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                VOLVER AL INICIO
+            </a>
+
+            <!-- Header -->
+            <div class="bg-surface border-4 border-primary p-8 md:p-12 relative mb-12">
+                <div class="absolute -top-4 -left-4 bg-primary text-background font-mono-label px-3 py-1 uppercase tracking-widest text-sm">DEV_LOG</div>
+                <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-primary/40 pointer-events-none hidden sm:block"></div>
+                <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-primary/40 pointer-events-none hidden sm:block"></div>
+                
+                <h1 class="font-headline-lg text-4xl md:text-6xl text-on-surface uppercase mb-4 tracking-tighter">
+                    {repo.name}
+                </h1>
+                
+                <p class="font-code-body text-xl text-on-surface-variant mb-8 max-w-2xl">
+                    {repo.description || 'No description provided.'}
+                </p>
+
+                <div class="flex flex-wrap gap-4 items-center">
+                    {repo.language && (
+                        <span class="font-mono-label bg-background border-2 border-primary px-4 py-2 text-on-surface uppercase">
+                            {repo.language}
+                        </span>
+                    )}
+                    <span class="font-mono-label text-on-surface-variant flex items-center gap-2">
+                        <span class="material-symbols-outlined text-base">star</span> {repo.stargazers_count}
+                    </span>
+                    <span class="font-mono-label text-on-surface-variant flex items-center gap-2">
+                        <span class="material-symbols-outlined text-base">fork_right</span> {repo.forks_count}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <article class="content-area bg-surface border-4 border-primary p-8 md:p-12 relative">
+                <div class="absolute -top-3 -right-3 bg-background text-primary font-mono-label px-3 py-1 text-sm border-2 border-primary">README.md</div>
+                
+                <div class="prose max-w-none prose-invert dark:prose-invert" set:html={readme}></div>
+            </article>
+
+            <!-- External Link Button -->
+            <div class="mt-12">
+                <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="w-full relative overflow-hidden bg-background text-on-surface border-4 border-primary font-mono-label py-6 uppercase transition-colors block text-center text-xl group-hover:bg-primary group-hover:text-background flex justify-center items-center gap-4 group">
+                    <span class="absolute inset-0 bg-primary/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                    <span class="relative z-10 flex items-center gap-4 group-hover:text-primary">
+                        VER CÓDIGO FUENTE EN GITHUB <span class="material-symbols-outlined">open_in_new</span>
+                    </span>
+                </a>
+            </div>
+            
+        </div>
+    </main>
+</Layout>

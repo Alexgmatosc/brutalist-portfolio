@@ -1,0 +1,57 @@
+---
+import { getI18n } from '../data/portfolioData';
+
+export interface Props {
+    lang?: 'es' | 'en';
+}
+const { lang = 'es' } = Astro.props;
+const i18n = getI18n(lang);
+---
+<section class="py-24 px-gutter border-b-border-thick border-primary-container relative bg-surface-container" id="contacto">
+    <div class="absolute inset-0 scanlines pointer-events-none opacity-30 z-0"></div>
+    <div class="max-w-[1200px] mx-auto relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-24">
+        
+        <div class="w-full lg:w-1/2">
+            <div class="sticky top-28">
+                <h2 class="font-headline-xl text-5xl md:text-headline-xl text-on-surface uppercase m-0 leading-none break-words">{i18n.sections.contactTitle}</h2>
+                <div class="mt-4 h-2 w-24 bg-primary mb-8"></div>
+                <p class="font-code-body text-xl text-on-surface-variant max-w-md">
+                    {i18n.sections.contactDescription}
+                </p>
+                <div class="mt-12 font-mono-label text-on-surface-variant border-l-2 border-primary pl-4">
+                    <p class="mb-2">&gt; STATUS: ACEPTANDO CONEXIONES</p>
+                    <p class="mb-2">&gt; PROTOCOLO: SMTP_SECURE</p>
+                    <p class="animate-pulse">&gt; _</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-1/2 bg-background border-4 border-primary p-8 md:p-12 relative">
+            <div class="absolute -top-4 -right-4 bg-primary text-background font-mono-label px-3 py-1 uppercase tracking-widest text-sm z-20">COMM_LINK</div>
+            
+            <form class="flex flex-col gap-8 relative z-10" onsubmit={`event.preventDefault(); alert('${i18n.contactForm.success}');`}>
+                
+                <div class="flex flex-col gap-2">
+                    <label for="name" class="font-mono-label text-on-surface-variant uppercase tracking-widest"><span class="text-primary mr-2">&gt;</span>{i18n.contactForm.name}</label>
+                    <input type="text" id="name" required class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all" placeholder="Ej: J. Doe">
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                    <label for="email" class="font-mono-label text-on-surface-variant uppercase tracking-widest"><span class="text-primary mr-2">&gt;</span>{i18n.contactForm.email}</label>
+                    <input type="email" id="email" required class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all" placeholder="sys@admin.com">
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                    <label for="message" class="font-mono-label text-on-surface-variant uppercase tracking-widest"><span class="text-primary mr-2">&gt;</span>{i18n.contactForm.message}</label>
+                    <textarea id="message" required rows="5" class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all resize-none" placeholder="Transmite tus coordenadas..."></textarea>
+                </div>
+                
+                <button type="submit" class="mt-4 bg-primary hover:bg-surface text-background hover:text-primary border-4 border-primary font-mono-label py-5 uppercase transition-colors text-xl hover:translate-x-1 hover:translate-y-1 flex justify-center items-center gap-3 group">
+                    <span class="material-symbols-outlined group-hover:animate-pulse">send</span>
+                    {i18n.contactForm.send}
+                </button>
+            </form>
+        </div>
+        
+    </div>
+</section>
