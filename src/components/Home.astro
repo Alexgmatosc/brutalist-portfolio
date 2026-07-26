@@ -93,11 +93,8 @@ LATENCY: 12ms
                         <div class="absolute -bottom-4 -right-4 bg-surface text-primary font-mono-label px-2 py-1 border-border-thick border-primary-container z-20">V. 4.0.9</div>
                         
                         <!-- Hero composition logo -->
-                        <div class="absolute right-[-5%] top-1/2 -translate-y-1/2 hidden lg:block opacity-10 md:opacity-20 pointer-events-none z-0 transform rotate-12">
-                            <Logo class="w-96 h-96 xl:w-[600px] xl:h-[600px] text-primary fill-current" />
-                        </div>
-                        <div class="absolute right-12 top-12 hidden xl:block opacity-80 pointer-events-none z-0">
-                            <Logo class="w-48 h-48 text-on-surface fill-current drop-shadow-md" />
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 lg:translate-x-1/8 hidden md:block pointer-events-none z-0">
+                            <Logo class="w-[500px] h-[500px] lg:w-[800px] lg:h-[800px] text-primary fill-current" />
                         </div>
 
                         <div class="relative z-10">
@@ -111,7 +108,7 @@ LATENCY: 12ms
                                 </span>
                             </h1>
                             
-                            <p class="mt-8 font-code-body text-code-body text-on-surface-variant max-w-2xl border-l-[2px] border-primary pl-4 tracking-tight bg-surface/50 backdrop-blur-sm" set:html={i18n.hero.description.join('<br/>')} />
+                            <p class="mt-8 font-code-body text-code-body text-on-surface-variant max-w-2xl border-l-[2px] border-primary pl-4 tracking-tight" set:html={i18n.hero.description.join('<br/>')} />
                             
                             <div class="mt-12 flex flex-col sm:flex-row gap-6 relative z-20">
                                 <a href="#dev" class="bg-primary hover:bg-surface text-background hover:text-primary border-border-thick border-primary hover:border-primary-container font-mono-label px-8 py-4 uppercase transition-colors flex items-center justify-center gap-2 group hover:translate-x-1 hover:translate-y-1">
