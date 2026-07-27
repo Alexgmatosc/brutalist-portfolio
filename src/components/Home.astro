@@ -255,7 +255,7 @@ LATENCY: 12ms
                         <h2 class="font-headline-xl text-5xl md:text-headline-xl text-on-surface uppercase m-0 leading-none break-words">{i18n.sections.devTitle}</h2>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-12">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-12">
                         {repos.length > 0 ? repos.map((repo, idx) => (
                             <ProjectCard 
                                 title={repo.name}
@@ -267,14 +267,14 @@ LATENCY: 12ms
                         )) : (
                             <p class="font-mono-label text-on-surface-variant">No se pudieron cargar los repositorios o el usuario no tiene repositorios públicos.</p>
                         )}
-                    </div>
+                    </ul>
 
                     <!-- 42 School Section -->
                     <div class="border-2 border-primary p-6 md:p-8 bg-surface-container relative mt-16">
                         <div class="absolute -top-4 left-6 bg-primary text-background font-mono-label px-3 py-1 text-sm z-10 uppercase">
                             42 School Core Curriculum
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
                             {schoolRepos.map((repo, idx) => (
                                 <ProjectCard 
                                     title={repo.name}
@@ -284,7 +284,7 @@ LATENCY: 12ms
                                     repoId={`42-${String(idx + 1).padStart(2, '0')}`}
                                 />
                             ))}
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </section>

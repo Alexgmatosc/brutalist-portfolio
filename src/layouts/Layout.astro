@@ -1,15 +1,43 @@
 ---
 export interface Props {
     lang?: 'es' | 'en';
+    title?: string;
+    description?: string;
 }
-const { lang = 'es' } = Astro.props;
+const { 
+    lang = 'es',
+    title = 'alexmatos.dev | Portfolio',
+    description = 'Portfolio of Alex Matos, Full Stack Web Developer and UX Designer.'
+} = Astro.props;
 import '../global.css';
 ---
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
     <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>alexmatos.dev | Portfolio</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- OpenGraph / Social Media Meta Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://alexmatos.dev" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={`
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alex Matos",
+      "url": "https://alexmatos.dev",
+      "jobTitle": "Full Stack Web Developer & UX Designer",
+      "sameAs": [
+        "https://github.com/Alexgmatosc"
+      ]
+    }
+    `} />
     <script is:inline>
         (function() {
             const savedTheme = localStorage.getItem('theme');
