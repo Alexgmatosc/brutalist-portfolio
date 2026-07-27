@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #c82a2a;
+  --color-primary-container: #c82a2a;
+  --color-background: var(--bg-background);
+  --color-surface: var(--bg-surface);
+  --color-surface-container: var(--bg-surface-container);
+  --color-on-surface: var(--text-on-surface);
+  --color-on-surface-variant: var(--text-on-surface-variant);
+  
+  --spacing-gutter: max(24px, 8vw);
+  --spacing-margin-page: 40px;
+  --spacing-stack-gap: 16px;
+  --spacing-grid-unit: 8px;
+  --spacing-border-thin: 1px;
+  --spacing-border-thick: 4px;
+  
+  --font-display-lg: "Playfair Display", serif;
+  --font-code-body: "JetBrains Mono", monospace;
+  --font-terminal-small: "JetBrains Mono", monospace;
+  --font-mono-label: "Space Mono", monospace;
+  --font-headline-lg-mobile: "Playfair Display", serif;
+  --font-headline-lg: "Playfair Display", serif;
+  --font-headline-xl: "Playfair Display", serif;
+  --font-pirata: "Pirata One", cursive;
+
+  --text-display-lg: 120px;
+  --text-display-lg--line-height: 100px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 400;
+
+  --text-code-body: 16px;
+  --text-code-body--line-height: 24px;
+  --text-code-body--font-weight: 400;
+
+  --text-terminal-small: 14px;
+  --text-terminal-small--line-height: 20px;
+  --text-terminal-small--font-weight: 400;
+
+  --text-mono-label: 12px;
+  --text-mono-label--line-height: 16px;
+  --text-mono-label--font-weight: 700;
+
+  --text-headline-lg-mobile: 32px;
+  --text-headline-lg-mobile--line-height: 32px;
+  --text-headline-lg-mobile--font-weight: 400;
+
+  --text-headline-lg: 48px;
+  --text-headline-lg--line-height: 48px;
+  --text-headline-lg--font-weight: 400;
+
+  --text-headline-xl: 72px;
+  --text-headline-xl--line-height: 72px;
+  --text-headline-xl--font-weight: 400;
+}
+
+:root {
+  --bg-background: #0d0d0d;
+  --bg-surface: #121212;
+  --bg-surface-container: #161616;
+  --text-on-surface: #e0e0e0;
+  --text-on-surface-variant: #888888;
+}
+
+.light {
+  --bg-background: #fdfcf0;
+  --bg-surface: #f5f2e6;
+  --bg-surface-container: #e6e2d3;
+  --text-on-surface: #1a1a1a;
+  --text-on-surface-variant: #555555;
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-background);
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(200, 42, 42, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(200, 42, 42, 0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.scanlines {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+  background-size: 100% 4px;
+}
+.acid-border {
+  border: 1px dashed rgba(255, 0, 0, 0.5);
+}

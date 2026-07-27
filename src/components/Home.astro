@@ -18,6 +18,9 @@ const i18n = getI18n(lang);
 let repos = [];
 let schoolRepos = [];
 try {
+    const token = import.meta.env.GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+    const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+    
     // Diccionario de fallbacks por si la API falla o llega al límite
     const fallbacks = {
         'stories.io': { name: 'stories.io', description: 'Generador de videos para redes sociales.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/stories.io' },
