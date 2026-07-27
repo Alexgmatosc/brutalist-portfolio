@@ -111,8 +111,9 @@ const enLink = currentPath.startsWith('/en') ? currentPath : `/en${currentPath =
         }
 
         const sections = Array.from(navLinks).map(link => {
-            const id = link.getAttribute('href').substring(1);
-            return document.getElementById(id);
+            const href = link.getAttribute('href') || '';
+            const id = href.split('#')[1];
+            return id ? document.getElementById(id) : null;
         }).filter(Boolean);
 
         // En mobile la clase activa es border-l-4 y bg-primary/10, en desktop border-b-4
@@ -120,7 +121,9 @@ const enLink = currentPath.startsWith('/en') ? currentPath : `/en${currentPath =
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     navLinks.forEach(link => {
-                        if (link.getAttribute('href') === `#${entry.target.id}`) {
+                        const href = link.getAttribute('href') || '';
+                        const linkId = href.split('#')[1];
+                        if (linkId === entry.target.id) {
                             // Desktop active
                             link.classList.add('md:border-b-4', 'md:border-primary', 'md:text-on-surface');
                             link.classList.remove('md:border-transparent', 'md:text-on-surface-variant');
