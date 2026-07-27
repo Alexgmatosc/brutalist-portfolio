@@ -298,7 +298,7 @@ LATENCY: 12ms
                     </div>
                     <div class="flex flex-col gap-12">
                         {articles.length > 0 ? articles.map((article, idx) => {
-                            const icons = ['visibility', 'touch_app', 'design_services', 'architecture'];
+                            const icons = ['visibility', 'touch-app', 'design-services', 'architecture'];
                             const slug = article.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
                             return (
                                 <UxProjectCard 
