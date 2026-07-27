@@ -16,26 +16,58 @@ const { lang = 'es' } = Astro.props;
 const i18n = getI18n(lang);
 
 let repos = [];
+let schoolRepos = [];
 try {
-    const token = import.meta.env.GITHUB_TOKEN || process.env.GITHUB_TOKEN;
-    console.log("Token cargado en Astro:", token ? "SÍ (oculto)" : "NO");
-    const headers = token 
-        ? { 'Authorization': `Bearer ${token}` } 
-        : {};
-    const res = await fetch('https://api.github.com/users/Alexgmatosc/repos?sort=updated&per_page=6', { headers });
-    if (res.ok) {
-        repos = await res.json();
-    } else {
-        repos = [
-            { name: 'growee-app', description: 'Sistema automatizado de cuidado de plantas.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/growee-app' },
-            { name: 'brutalist-portfolio', description: 'Portafolio personal con temática cyberpunk y brutalista.', language: 'Astro', html_url: 'https://github.com/Alexgmatosc/brutalist-portfolio' },
-            { name: 'terminal-cli', description: 'Interfaz de línea de comandos experimental.', language: 'Go', html_url: 'https://github.com/Alexgmatosc/terminal-cli' }
-        ];
+    // Diccionario de fallbacks por si la API falla o llega al límite
+    const fallbacks = {
+        'stories.io': { name: 'stories.io', description: 'Generador de videos para redes sociales.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/stories.io' },
+        'homehub': { name: 'homehub', description: 'Plataforma de gestión del hogar.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/homehub' },
+        'roomie-detector': { name: 'roomie-detector', description: 'App para encontrar compañeros de piso.', language: 'React', html_url: 'https://github.com/Alexgmatosc/roomie-detector' },
+        'el-rastro-e-comerce': { name: 'el-rastro-e-comerce', description: 'Web para e-commerce que vende ropa online.', language: 'JavaScript', html_url: 'https://github.com/Alexgmatosc/el-rastro-e-comerce' },
+        'brutalist-portfolio': { name: 'brutalist-portfolio', description: 'Portafolio personal brutalista.', language: 'Astro', html_url: 'https://github.com/Alexgmatosc/brutalist-portfolio' },
+        '42-ft_Printf': { name: '42-ft_Printf', description: 'Custom printf implementation.', language: 'C', html_url: 'https://github.com/Alexgmatosc/42-ft_Printf' },
+        '42-Libft': { name: '42-Libft', description: 'Custom C library.', language: 'C', html_url: 'https://github.com/Alexgmatosc/42-Libft' },
+        'get-next-line': { name: 'get-next-line', description: 'Function that reads a file line by line.', language: 'C', html_url: 'https://github.com/Alexgmatosc/get-next-line' }
+    };
+
+    // Proyectos a recuperar desde GitHub
+    const repoNames = ['stories.io', 'homehub', 'roomie-detector', 'el-rastro-e-comerce', 'brutalist-portfolio'];
+    const fetchedRepos = [];
+    for (const name of repoNames) {
+        const res = await fetch(`https://api.github.com/repos/Alexgmatosc/${name}`, { headers });
+        if (res.ok) {
+            fetchedRepos.push(await res.json());
+        } else {
+            fetchedRepos.push(fallbacks[name]);
+        }
     }
+
+    // Sub-proyectos de 42
+    const subRepoNames = ['42-ft_Printf', '42-Libft', 'get-next-line'];
+    const subRepos = [];
+    for (const name of subRepoNames) {
+        const res = await fetch(`https://api.github.com/repos/Alexgmatosc/${name}`, { headers });
+        let data = res.ok ? await res.json() : fallbacks[name];
+        subRepos.push(data);
+    }
+
+    // Export variables para el frontend
+    repos = fetchedRepos;
+    schoolRepos = subRepos;
 } catch (e) {
     console.error("Error fetching repos", e);
+    // Diccionario de fallbacks replicado por si falla toda la conexión
     repos = [
-        { name: 'growee-app', description: 'Sistema automatizado de cuidado de plantas.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/growee-app' }
+        { name: 'stories.io', description: 'Generador de videos para redes sociales.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/stories.io' },
+        { name: 'homehub', description: 'Plataforma de gestión del hogar.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/homehub' },
+        { name: 'roomie-detector', description: 'App para encontrar compañeros de piso.', language: 'React', html_url: 'https://github.com/Alexgmatosc/roomie-detector' },
+        { name: 'el-rastro-e-comerce', description: 'Web para e-commerce que vende ropa online.', language: 'JavaScript', html_url: 'https://github.com/Alexgmatosc/el-rastro-e-comerce' },
+        { name: 'brutalist-portfolio', description: 'Portafolio personal brutalista.', language: 'Astro', html_url: 'https://github.com/Alexgmatosc/brutalist-portfolio' }
+    ];
+    schoolRepos = [
+        { name: '42-ft_Printf', description: 'Custom printf implementation.', language: 'C', html_url: 'https://github.com/Alexgmatosc/42-ft_Printf' },
+        { name: '42-Libft', description: 'Custom C library.', language: 'C', html_url: 'https://github.com/Alexgmatosc/42-Libft' },
+        { name: 'get-next-line', description: 'Function that reads a file line by line.', language: 'C', html_url: 'https://github.com/Alexgmatosc/get-next-line' }
     ];
 }
 
@@ -70,7 +102,7 @@ try {
             </div>
 
             <!-- Hero Section -->
-            <section class="min-h-screen relative flex flex-col px-gutter border-b-border-thick border-primary-container bg-surface overflow-hidden py-32 bg-grid-pattern" id="inicio">
+            <section class="min-h-[100svh] relative flex flex-col px-gutter border-b-border-thick border-primary-container bg-surface overflow-hidden pt-24 pb-12 md:py-32 bg-grid-pattern" id="inicio">
                 <div class="absolute inset-0 scanlines pointer-events-none opacity-50 z-0"></div>
                 <div class="absolute top-1/4 left-10 font-mono-label text-primary/30 text-xs hidden lg:block whitespace-pre z-0">
 +--------------------+
@@ -87,24 +119,26 @@ LATENCY: 12ms
                 <div class="absolute inset-y-0 left-1/4 w-[1px] acid-border hidden md:block z-0"></div>
                 <div class="absolute inset-x-0 top-1/3 h-[1px] acid-border hidden md:block z-0"></div>
                 
-                <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-gutter w-full my-auto">
-                    <div class="md:col-span-8 md:col-start-2 lg:col-span-9 border-border-thick border-primary-container bg-surface p-6 sm:p-12 relative overflow-hidden">
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-gutter w-full mt-4 mb-auto md:my-auto">
+                    <div class="md:col-span-10 md:col-start-1 lg:col-span-9 lg:col-start-2 border-border-thick border-primary-container bg-surface p-6 sm:p-12 relative">
                         <div class="absolute -top-4 -left-4 bg-primary text-background font-mono-label px-2 py-1 uppercase tracking-widest text-sm z-20">SYS_INIT_001</div>
                         <div class="absolute -bottom-4 -right-4 bg-surface text-primary font-mono-label px-2 py-1 border-border-thick border-primary-container z-20">V. 4.0.9</div>
                         
                         <!-- Hero composition logo -->
-                        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 lg:translate-x-1/8 hidden md:block pointer-events-none z-0">
-                            <Logo class="w-[500px] h-[500px] lg:w-[800px] lg:h-[800px] text-primary fill-current" />
+                        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 rounded-sm">
+                            <div class="absolute right-[-20%] lg:right-[-10%] top-1/2 -translate-y-1/2 opacity-10">
+                                <Logo class="w-[500px] h-[500px] lg:w-[700px] lg:h-[700px] xl:w-[900px] xl:h-[900px] text-primary fill-current" />
+                            </div>
                         </div>
 
                         <div class="relative z-10">
                             <h1 class="font-headline-xl text-on-surface leading-[0.85] tracking-tighter">
-                                <span class="block text-[60px] sm:text-[80px] md:text-[140px] lg:text-[180px] uppercase font-pirata tracking-wide md:tracking-[0.05em] leading-[0.9]">{i18n.hero.firstName}</span>
-                                <span class="block text-[60px] sm:text-[80px] md:text-[140px] lg:text-[180px] uppercase font-pirata tracking-wide md:tracking-[0.05em] leading-[0.9]">{i18n.hero.lastName}</span>
+                                <span class="block text-[60px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] uppercase font-pirata tracking-wide md:tracking-[0.05em] leading-[0.9]">{i18n.hero.firstName}</span>
+                                <span class="block text-[60px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] uppercase font-pirata tracking-wide md:tracking-[0.05em] leading-[0.9]">{i18n.hero.lastName}</span>
                                 <span class="flex flex-wrap items-baseline gap-2 md:gap-4 ml-0 sm:ml-12 mt-0 md:-mt-4 text-on-surface">
-                                    <span class="text-4xl md:text-7xl tracking-widest uppercase">{i18n.hero.roles[0]}</span>
-                                    <span class="text-3xl md:text-5xl text-primary opacity-80">&amp;</span>
-                                    <span class="text-4xl sm:text-6xl md:text-[90px] tracking-tighter">{i18n.hero.roles[1]}</span>
+                                    <span class="text-4xl md:text-5xl lg:text-7xl tracking-widest uppercase">{i18n.hero.roles[0]}</span>
+                                    <span class="text-3xl md:text-4xl lg:text-5xl text-primary opacity-80">&amp;</span>
+                                    <span class="text-4xl sm:text-6xl md:text-[70px] lg:text-[90px] tracking-tighter">{i18n.hero.roles[1]}</span>
                                 </span>
                             </h1>
                             
@@ -126,7 +160,7 @@ LATENCY: 12ms
                         </div>
                     </div>
                     <!-- Decorative Sidebar -->
-                    <div class="hidden md:flex col-span-2 col-start-11 border-l-border-thick border-primary-container flex-col justify-between p-4 bg-surface/80 backdrop-blur-sm relative z-10">
+                    <div class="hidden md:flex col-span-2 col-start-11 border-l-border-thick border-primary-container flex-col justify-between p-4 bg-surface relative z-10">
                         <div class="w-full flex justify-center mb-8">
                             <Logo class="w-16 h-16 text-primary opacity-80 fill-current animate-pulse" />
                         </div>
@@ -217,7 +251,7 @@ LATENCY: 12ms
                         <h2 class="font-headline-xl text-5xl md:text-headline-xl text-on-surface uppercase m-0 leading-none break-words">{i18n.sections.devTitle}</h2>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-12">
                         {repos.length > 0 ? repos.map((repo, idx) => (
                             <ProjectCard 
                                 title={repo.name}
@@ -229,6 +263,24 @@ LATENCY: 12ms
                         )) : (
                             <p class="font-mono-label text-on-surface-variant">No se pudieron cargar los repositorios o el usuario no tiene repositorios públicos.</p>
                         )}
+                    </div>
+
+                    <!-- 42 School Section -->
+                    <div class="border-2 border-primary p-6 md:p-8 bg-surface-container relative mt-16">
+                        <div class="absolute -top-4 left-6 bg-primary text-background font-mono-label px-3 py-1 text-sm z-10 uppercase">
+                            42 School Core Curriculum
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+                            {schoolRepos.map((repo, idx) => (
+                                <ProjectCard 
+                                    title={repo.name}
+                                    description={repo.description}
+                                    languages={repo.language ? [repo.language] : ['Unknown']}
+                                    repoUrl={lang === 'en' ? `/en/dev/${repo.name}` : `/dev/${repo.name}`}
+                                    repoId={`42-${String(idx + 1).padStart(2, '0')}`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
