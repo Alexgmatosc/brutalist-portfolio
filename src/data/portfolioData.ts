@@ -49,8 +49,8 @@ export const portfolioData = {
             lastName: "Matos",
             roles: ["Web", "UXDesign"],
             description: [
-                "> ROLE: WEB DEVELOPER & UX DESIGNER.",
-                "> OBJECTIVE: TRANSFORM INEFFICIENT PROCESSES INTO FUNCTIONAL, AESTHETIC, AND STRIKING DIGITAL EXPERIENCES."
+                "> DESIGN AND DEVELOPMENT OF DIGITAL EXPERIENCES.",
+                "> FUNCTIONAL, AESTHETIC, AND STRIKING DIGITAL EXPERIENCES."
             ],
             buttons: {
                 projects: "View Projects",
@@ -58,19 +58,19 @@ export const portfolioData = {
             }
         },
         about: {
-            sidebarIntro: "Web developer with an artist's soul (literally). Intersecting pure software logic with unique visual experience design.",
+            sidebarIntro: "Web developer with an artist's heart. Combining pure software logic with unique visual experience design.",
             bioParagraphs: [
-                "Today, with 5 years of experience in the tech sector, my main purpose is to merge my two great passions: art and technology. I have consolidated a robust technical foundation that allows me to move easily between traditional languages like PHP and JavaScript, and master the modern ecosystem with tools like React, Astro, and TypeScript. My focus is always on hunting down operational inefficiencies and building platforms where functionality meets a visually striking design.",
-                "Art remains my filter for viewing the world, keeping my interest in disciplines like lettering and tattooing alive. And when I need to disconnect from the screens, you'll most likely find me looking for a good dark roast coffee, or riding the asphalt of Madrid on my fixed-gear bike."
+                "Today, with 6 years of experience in the tech sector, my main purpose is to merge my two great passions: art and technology. I have consolidated a robust technical foundation that allows me to move effortlessly between traditional languages like PHP and JavaScript and master the modern ecosystem with tools like React, Astro, and TypeScript. My focus is always on seeking operational improvements and building platforms where functionality meets a visually striking design.",
+                "The visual remains my filter for viewing the world, keeping my interest in disciplines like lettering and tattooing alive in my personal life. And when I need to disconnect from the screens, you'll most likely find me looking for a good coffee, or riding the asphalt of Madrid on my fixed-gear bike."
             ],
-            devSkills: ['React', 'Astro', 'TypeScript', 'Node.js', 'PHP', 'Tailwind', 'Linux', 'Terminal'],
-            uxSkills: ['Figma', 'Wireframing', 'User Research', 'Prototyping', 'Design Systems', 'Accessibility']
+            devSkills: ['React', 'Astro', 'TypeScript', 'Node.js', 'PHP', 'Tailwind', 'Linux', 'Terminal', 'Git', 'C'],
+            uxSkills: ['Figma', 'Wireframing', 'UX Research', 'Prototyping', 'Design Systems', 'Accessibility']
         },
         sections: {
             devTitle: "DEV PROJECTS",
             uxTitle: "UX DESIGN & ARTICLES",
-            contactTitle: "Initiate Sequence",
-            contactDescription: "Have a project in mind? Input parameters into the terminal. I will respond in less than 24 clock cycles."
+            contactTitle: "Let's talk a bit",
+            contactDescription: "[Have a project in mind? Tell me a bit more]"
         },
         nav: {
             home: "Home",
@@ -80,11 +80,11 @@ export const portfolioData = {
             contact: "Contact"
         },
         contactForm: {
-            name: "Identifier [Name]",
-            email: "Return Node [Email]",
-            message: "Payload [Message]",
-            send: "Execute",
-            success: "Connection established. Simulated message sent."
+            name: "[Name]",
+            email: "[Email]",
+            message: "[Write your message]",
+            send: "[Send]",
+            success: "Connection established. Your message has been sent."
         }
     }
 };
