@@ -36,9 +36,7 @@ const enLink = currentPath.startsWith('/en') ? currentPath : `/en${currentPath =
                     <span class="text-on-surface-variant/50">|</span>
                     <a href={enLink} class={`transition-colors ${lang === 'en' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>EN</a>
                 </div>
-                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center hidden sm:flex">
-                    <Icon name="material-symbols:person" class="text-background text-[18px]" />
-                </div>
+
             </div>
         </nav>
         

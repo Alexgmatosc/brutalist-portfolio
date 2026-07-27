@@ -3,7 +3,7 @@ export const portfolioData = {
         hero: {
             firstName: "Alexander",
             lastName: "Matos",
-            roles: ["Web", "UXDesign"],
+            roles: ["<span class='text-primary'>WEB</span>Dev", "<span class='text-primary'>UX</span>Design"],
             description: [
                 "> DISEÑO Y DESARROLLO DE EXPERIENCIAS DIGITALES.",
                 "> EXPERIENCIAS DIGITALES FUNCIONALES, ESTÉTICAS Y LLAMATIVAS."
@@ -47,7 +47,7 @@ export const portfolioData = {
         hero: {
             firstName: "Alexander",
             lastName: "Matos",
-            roles: ["Web", "UXDesign"],
+            roles: ["<span class='text-primary'>WEB</span>Dev", "<span class='text-primary'>UX</span>Design"],
             description: [
                 "> DESIGN AND DEVELOPMENT OF DIGITAL EXPERIENCES.",
                 "> FUNCTIONAL, AESTHETIC, AND STRIKING DIGITAL EXPERIENCES."
