@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Layout from '../../../layouts/Layout.astro';
 import { marked } from 'marked';
 
@@ -62,7 +63,7 @@ const { repo, readme } = Astro.props;
         <div class="max-w-[1000px] mx-auto px-gutter py-12">
             
             <a href="/en/" class="inline-flex items-center gap-2 font-mono-label text-primary hover:text-on-surface transition-colors mb-8 group">
-                <span class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                <Icon name="material-symbols:arrow-back" class="text-lg group-hover:-translate-x-1 transition-transform" />
                 BACK TO HOME
             </a>
 
@@ -87,10 +88,10 @@ const { repo, readme } = Astro.props;
                         </span>
                     )}
                     <span class="font-mono-label text-on-surface-variant flex items-center gap-2">
-                        <span class="material-symbols-outlined text-base">star</span> {repo.stargazers_count}
+                        <Icon name="material-symbols:star" class="text-base" /> {repo.stargazers_count}
                     </span>
                     <span class="font-mono-label text-on-surface-variant flex items-center gap-2">
-                        <span class="material-symbols-outlined text-base">fork_right</span> {repo.forks_count}
+                        <Icon name="material-symbols:fork-right" class="text-base" /> {repo.forks_count}
                     </span>
                 </div>
             </div>
@@ -107,7 +108,7 @@ const { repo, readme } = Astro.props;
                 <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="w-full relative overflow-hidden bg-background text-on-surface border-4 border-primary font-mono-label py-6 uppercase transition-colors block text-center text-xl group-hover:bg-primary group-hover:text-background flex justify-center items-center gap-4 group">
                     <span class="absolute inset-0 bg-primary/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                     <span class="relative z-10 flex items-center gap-4 group-hover:text-primary">
-                        VIEW SOURCE CODE ON GITHUB <span class="material-symbols-outlined">open_in_new</span>
+                        VIEW SOURCE CODE ON GITHUB <Icon name="material-symbols:open-in-new"  />
                     </span>
                 </a>
             </div>

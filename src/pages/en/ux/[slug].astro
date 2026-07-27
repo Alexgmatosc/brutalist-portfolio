@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Layout from '../../../layouts/Layout.astro';
 import Parser from 'rss-parser';
 
@@ -36,7 +37,7 @@ const { article } = Astro.props;
         <div class="max-w-[1000px] mx-auto px-gutter py-12">
             
             <a href="/en/#ux" class="inline-flex items-center gap-2 font-mono-label text-primary hover:text-on-surface transition-colors mb-8 group">
-                <span class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                <Icon name="material-symbols:arrow-back" class="text-lg group-hover:-translate-x-1 transition-transform" />
                 BACK TO HOME
             </a>
 
@@ -55,7 +56,7 @@ const { article } = Astro.props;
                         MEDIUM ARTICLE
                     </span>
                     <span class="font-mono-label text-on-surface-variant flex items-center gap-2">
-                        <span class="material-symbols-outlined text-base">calendar_today</span> 
+                        <Icon name="material-symbols:calendar-today" class="text-base" /> 
                         {new Date(article.pubDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
                     </span>
                     {article.categories && article.categories.length > 0 && (
@@ -78,7 +79,7 @@ const { article } = Astro.props;
                 <a href={article.link} target="_blank" rel="noopener noreferrer" class="w-full relative overflow-hidden bg-background text-on-surface border-4 border-primary font-mono-label py-6 uppercase transition-colors block text-center text-xl group-hover:bg-primary group-hover:text-background flex justify-center items-center gap-4 group">
                     <span class="absolute inset-0 bg-primary/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                     <span class="relative z-10 flex items-center gap-4 group-hover:text-primary">
-                        READ ON MEDIUM <span class="material-symbols-outlined">open_in_new</span>
+                        READ ON MEDIUM <Icon name="material-symbols:open-in-new"  />
                     </span>
                 </a>
             </div>
