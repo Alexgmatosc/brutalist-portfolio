@@ -1,7 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Layout from '../../layouts/Layout.astro';
 import { marked } from 'marked';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 
 export async function getStaticPaths() {
     let repos = [];
@@ -62,7 +64,8 @@ const { repo, readme } = Astro.props;
 ---
 
 <Layout>
-    <main class="w-full pt-20 min-h-screen">
+    <Header lang="es" />
+    <main class="w-full pt-32 min-h-screen">
         <div class="max-w-[1000px] mx-auto px-gutter py-12">
             
             <a href="/" class="inline-flex items-center gap-2 font-mono-label text-primary hover:text-on-surface transition-colors mb-8 group">
@@ -118,6 +121,7 @@ const { repo, readme } = Astro.props;
             
         </div>
     </main>
+    <Footer />
 </Layout>
 
 <style is:global>

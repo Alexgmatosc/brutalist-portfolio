@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ id }) => {
+  return id.startsWith('es/');
+});
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="alexmatos.dev | Blog" description="Artículos sobre diseño UX, desarrollo web y brutalismo.">
+    <Header lang="es" />
+    
+    <main class="pt-32 pb-16 min-h-screen px-gutter">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="font-headline text-4xl md:text-5xl text-primary mb-12 uppercase">INITIUM // BLOG</h1>
+            
+            <div class="space-y-8">
+                {sortedPosts.map((post) => (
+                    <article class="border-border-thick border-primary-container bg-surface p-6 md:p-8 hover:border-primary transition-colors group">
+                        <div class="font-mono-label text-xs text-on-surface-variant mb-3 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-primary inline-block"></span>
+                            {post.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+                        </div>
+                        <a href={`/blog/${post.id.replace('es/', '')}`} class="block">
+                            <h2 class="font-headline text-2xl md:text-3xl text-on-surface group-hover:text-primary transition-colors mb-4 uppercase">
+                                {post.data.title}
+                            </h2>
+                            <p class="font-code-body text-on-surface-variant line-clamp-3">
+                                {post.data.description}
+                            </p>
+                        </a>
+                        <div class="mt-6 flex justify-end">
+                            <a href={`/blog/${post.id.replace('es/', '')}`} class="font-mono-label text-sm text-background bg-primary px-4 py-2 hover:bg-on-surface transition-colors uppercase">
+                                Leer artículo &gt;
+                            </a>
+                        </div>
+                    </article>
+                ))}
+                
+                {sortedPosts.length === 0 && (
+                    <div class="text-center p-12 border-border-thin border-primary-container font-mono-label text-on-surface-variant">
+                        > NO HAY ARTÍCULOS DISPONIBLES EN ESTE MOMENTO
+                    </div>
+                )}
+            </div>
+        </div>
+    </main>
+    
+    <Footer />
+</Layout>

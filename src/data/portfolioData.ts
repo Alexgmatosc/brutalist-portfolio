@@ -20,7 +20,15 @@ export const portfolioData = {
                 "Lo visual sigue siendo mi filtro para ver el mundo, manteniendo vivo mi interés por disciplinas como el lettering y el tatuaje en mi vida personal. Y cuando necesito desconectar de las pantallas, lo más probable es que me encuentres buscando un buen café, o recorriendo el asfalto de Madrid sobre mi bici de piñón fijo."
             ],
             devSkills: ['React', 'Astro', 'TypeScript', 'Node.js', 'PHP', 'Tailwind', 'Linux', 'Terminal', 'Git', 'C'],
-            uxSkills: ['Figma', 'Wireframing', 'UX Research', 'Prototipado', 'Sistemas de Diseño', 'Accesibilidad']
+            uxSkills: ['Figma', 'Wireframing', 'UX Research', 'Prototipado', 'Sistemas de Diseño', 'Accesibilidad'],
+            labels: {
+                profile: '_PERFIL',
+                motion: 'SIEMPRE EN MOVIMIENTO',
+                skills: '_HABILIDADES',
+                dev: '# DESARROLLO',
+                ux: '# DISEÑO',
+                portrait: 'RETRATO'
+            }
         },
         sections: {
             devTitle: "DEV PROJECTS",
@@ -33,6 +41,7 @@ export const portfolioData = {
             about: "Sobre mí",
             dev: "Dev",
             ux: "UX",
+            blog: "Blog",
             contact: "Contacto"
         },
         contactForm: {
@@ -40,7 +49,13 @@ export const portfolioData = {
             email: "[Email]",
             message: "[Escribe tu mensaje]",
             send: "[Enviar]",
-            success: "Conexión establecida.Tu Mensaje ha sido enviado."
+            success: "[ ÉXITO: Mensaje enviado correctamente ]",
+            error: "[ ERROR: No se pudo enviar el mensaje. Inténtalo de nuevo. ]",
+            placeholderEmail: "[hola@ejemplo.com]",
+            statusOpen: "> ABIERTO A NUEVAS PROPUESTAS",
+            statusProtocol: "> COMUNICACIÓN DIRECTA",
+            sending: "PROCESANDO...",
+            sent: "¡ENVIADO!"
         }
     },
     en: {
@@ -64,7 +79,15 @@ export const portfolioData = {
                 "The visual remains my filter for viewing the world, keeping my interest in disciplines like lettering and tattooing alive in my personal life. And when I need to disconnect from the screens, you'll most likely find me looking for a good coffee, or riding the asphalt of Madrid on my fixed-gear bike."
             ],
             devSkills: ['React', 'Astro', 'TypeScript', 'Node.js', 'PHP', 'Tailwind', 'Linux', 'Terminal', 'Git', 'C'],
-            uxSkills: ['Figma', 'Wireframing', 'UX Research', 'Prototyping', 'Design Systems', 'Accessibility']
+            uxSkills: ['Figma', 'Wireframing', 'UX Research', 'Prototyping', 'Design Systems', 'Accessibility'],
+            labels: {
+                profile: '_PROFILE',
+                motion: 'ALWAYS IN MOTION',
+                skills: '_SKILLS',
+                dev: '# DEVELOPMENT',
+                ux: '# DESIGN',
+                portrait: 'PORTRAIT'
+            }
         },
         sections: {
             devTitle: "DEV PROJECTS",
@@ -77,6 +100,7 @@ export const portfolioData = {
             about: "About",
             dev: "Dev",
             ux: "UX",
+            blog: "Blog",
             contact: "Contact"
         },
         contactForm: {
@@ -84,7 +108,13 @@ export const portfolioData = {
             email: "[Email]",
             message: "[Write your message]",
             send: "[Send]",
-            success: "Connection established. Your message has been sent."
+            success: "[ SUCCESS: Message sent correctly ]",
+            error: "[ ERROR: Message could not be sent. Please try again. ]",
+            placeholderEmail: "[hello@example.com]",
+            statusOpen: "> OPEN TO NEW OPPORTUNITIES",
+            statusProtocol: "> DIRECT COMMUNICATION",
+            sending: "PROCESSING...",
+            sent: "SENT!"
         }
     }
 };

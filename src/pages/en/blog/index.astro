@@ -1,0 +1,53 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ id }) => {
+  return id.startsWith('en/');
+});
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout lang="en" title="alexmatos.dev | Blog" description="Articles on UX design, web development, and brutalism.">
+    <Header lang="en" />
+    
+    <main class="pt-32 pb-16 min-h-screen px-gutter">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="font-headline text-4xl md:text-5xl text-primary mb-12 uppercase">INITIUM // BLOG</h1>
+            
+            <div class="space-y-8">
+                {sortedPosts.map((post) => (
+                    <article class="border-border-thick border-primary-container bg-surface p-6 md:p-8 hover:border-primary transition-colors group">
+                        <div class="font-mono-label text-xs text-on-surface-variant mb-3 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-primary inline-block"></span>
+                            {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                        </div>
+                        <a href={`/en/blog/${post.id.replace('en/', '')}`} class="block">
+                            <h2 class="font-headline text-2xl md:text-3xl text-on-surface group-hover:text-primary transition-colors mb-4 uppercase">
+                                {post.data.title}
+                            </h2>
+                            <p class="font-code-body text-on-surface-variant line-clamp-3">
+                                {post.data.description}
+                            </p>
+                        </a>
+                        <div class="mt-6 flex justify-end">
+                            <a href={`/en/blog/${post.id.replace('en/', '')}`} class="font-mono-label text-sm text-background bg-primary px-4 py-2 hover:bg-on-surface transition-colors uppercase">
+                                Read article &gt;
+                            </a>
+                        </div>
+                    </article>
+                ))}
+                
+                {sortedPosts.length === 0 && (
+                    <div class="text-center p-12 border-border-thin border-primary-container font-mono-label text-on-surface-variant">
+                        > NO ARTICLES AVAILABLE AT THIS TIME
+                    </div>
+                )}
+            </div>
+        </div>
+    </main>
+    
+    <Footer />
+</Layout>

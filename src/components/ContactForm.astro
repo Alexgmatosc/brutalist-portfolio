@@ -20,8 +20,8 @@ const i18n = getI18n(lang);
                     {i18n.sections.contactDescription}
                 </p>
                 <div class="mt-12 font-mono-label text-on-surface-variant border-l-2 border-primary pl-4">
-                    <p class="mb-2">&gt; STATUS: ACEPTANDO CONEXIONES</p>
-                    <p class="mb-2">&gt; PROTOCOLO: SMTP_SECURE</p>
+                    <p class="mb-2">{i18n.contactForm.statusOpen}</p>
+                    <p class="mb-2">{i18n.contactForm.statusProtocol}</p>
                     <p class="animate-pulse">&gt; _</p>
                 </div>
             </div>
@@ -38,7 +38,7 @@ const i18n = getI18n(lang);
                 
                 <div class="flex flex-col gap-2">
                     <label for="email" class="font-mono-label text-on-surface-variant uppercase tracking-widest"><span class="text-primary mr-2">&gt;</span>{i18n.contactForm.email}</label>
-                    <input type="email" name="email" id="email" required class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all" placeholder="[sys@admin.com]">
+                    <input type="email" name="email" id="email" required class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all" placeholder={i18n.contactForm.placeholderEmail}>
                 </div>
                 
                 <div class="flex flex-col gap-2">
@@ -57,9 +57,10 @@ const i18n = getI18n(lang);
     </div>
 </section>
 
-<script>
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+<script define:vars={{ successMsg: i18n.contactForm.success, errorMsg: i18n.contactForm.error, sendingMsg: i18n.contactForm.sending, sentMsg: i18n.contactForm.sent }}>
+function setupContactForm() {
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
     const btnIcon = document.getElementById('btn-icon');
     const statusMsg = document.getElementById('form-status');
@@ -70,7 +71,7 @@ const i18n = getI18n(lang);
             
             // Estado de carga
             const originalText = btnText.innerText;
-            btnText.innerText = 'PROCESANDO...';
+            btnText.innerText = sendingMsg;
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
             statusMsg.classList.add('hidden');
@@ -91,8 +92,8 @@ const i18n = getI18n(lang);
 
                 if (response.ok) {
                     // Éxito
-                    btnText.innerText = '¡ENVIADO!';
-                    statusMsg.innerText = '[ SUCCESS: Mensaje transmitido correctamente ]';
+                    btnText.innerText = sentMsg;
+                    statusMsg.innerText = successMsg;
                     statusMsg.classList.remove('hidden', 'text-error');
                     statusMsg.classList.add('text-primary');
                     form.reset();
@@ -102,7 +103,7 @@ const i18n = getI18n(lang);
                 }
             } catch (error) {
                 // Error de red o código != 200
-                statusMsg.innerText = '[ ERROR: Fallo en la transmisión. Inténtalo de nuevo. ]';
+                statusMsg.innerText = errorMsg;
                 statusMsg.classList.remove('hidden', 'text-primary');
                 statusMsg.classList.add('text-[#ff0000]'); // Ajustar color error si es necesario
             } finally {
@@ -115,4 +116,6 @@ const i18n = getI18n(lang);
             }
         });
     }
+}
+document.addEventListener('astro:page-load', setupContactForm);
 </script>

@@ -11,12 +11,14 @@ const {
 } = Astro.props;
 import '../global.css';
 import Analytics from '@vercel/analytics/astro';
+import { ClientRouter } from 'astro:transitions';
 ---
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
     <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>{title}</title>
+    <ClientRouter />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     
@@ -47,6 +49,20 @@ import Analytics from '@vercel/analytics/astro';
                 document.documentElement.classList.add('light');
             }
         })();
+        
+        // Fix for Astro ViewTransitions cross-page hash links
+        document.addEventListener('astro:page-load', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const id = hash.substring(1);
+                const element = document.getElementById(id);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }, 50); // slight delay to let DOM render and layout compute
+                }
+            }
+        });
     </script>
 </head>
 <body class="bg-background font-code-body text-on-surface">

@@ -127,8 +127,8 @@ LATENCY: 12ms
                 
                 <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-gutter w-full mt-4 mb-auto md:my-auto">
                     <div class="md:col-span-10 md:col-start-1 lg:col-span-9 lg:col-start-2 border-border-thick border-primary-container bg-surface p-6 sm:p-12 relative">
-                        <div class="absolute -top-4 -left-4 bg-primary text-background font-mono-label px-2 py-1 uppercase tracking-widest text-sm z-20">SYS_INIT_001</div>
-                        <div class="absolute -bottom-4 -right-4 bg-surface text-primary font-mono-label px-2 py-1 border-border-thick border-primary-container z-20">V. 4.0.9</div>
+                        <div class="absolute -top-4 -left-4 bg-primary text-background font-mono-label px-2 py-1 uppercase tracking-widest text-sm z-20">INITIUM</div>
+                        <div class="absolute -bottom-4 -right-4 bg-surface text-primary font-mono-label px-2 py-1 border-border-thick border-primary-container z-20">EDICIÓN I</div>
                         
                         <!-- Hero composition logo -->
                         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0 rounded-sm">
@@ -171,7 +171,7 @@ LATENCY: 12ms
                             <Logo class="w-16 h-16 text-primary opacity-80 fill-current animate-pulse" />
                         </div>
                         <p class="font-mono-label text-primary [writing-mode:vertical-rl] rotate-180 uppercase tracking-widest opacity-70">
-                            [ STATUS: OPERATIONAL ] // OVERRIDE CODE: A7X9
+                            [ CREATIO EX NIHILO ] // ARS LONGA, VITA BREVIS
                         </p>
                     </div>
                 </div>
@@ -192,7 +192,7 @@ LATENCY: 12ms
                             <div class="mt-8 border-border-thick border-primary p-0 h-[300px] w-full flex flex-col justify-center items-center relative overflow-hidden group">
                                 <Image src={profileImg} alt="Alexander Matos" class="w-full h-full object-cover grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-500" />
                                 <div class="absolute inset-0 bg-primary/20 mix-blend-multiply opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none"></div>
-                                <div class="absolute bottom-2 right-2 bg-surface border-border-thin border-primary px-2 py-1 font-mono-label text-[10px] text-primary opacity-70">IMG_SRC_VERIFIED</div>
+                                <div class="absolute bottom-2 right-2 bg-surface border-border-thin border-primary px-2 py-1 font-mono-label text-[10px] text-primary opacity-70">{i18n.about.labels.portrait}</div>
                             </div>
                         </div>
                     </div>
@@ -202,7 +202,7 @@ LATENCY: 12ms
                         <!-- Bio -->
                         <div class="bg-surface border-border-thick border-primary-container p-8 relative overflow-hidden">
                             <div class="absolute right-0 top-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full mix-blend-multiply dark:mix-blend-screen"></div>
-                            <div class="font-mono-label text-on-surface-variant mb-4 border-l-2 border-primary pl-2 inline-block">_USER_BIO.TXT</div>
+                            <div class="font-mono-label text-on-surface-variant mb-4 border-l-2 border-primary pl-2 inline-block">{i18n.about.labels.profile}</div>
                             <div class="font-code-body text-code-body text-on-surface leading-relaxed space-y-4">
                                 {i18n.about.bioParagraphs.map(paragraph => (
                                     <p>{paragraph}</p>
@@ -210,16 +210,16 @@ LATENCY: 12ms
                             </div>
                             <div class="mt-6 font-terminal-small text-secondary flex items-center gap-2">
                                 <span class="w-3 h-3 bg-primary animate-pulse inline-block"></span>
-                                SYSTEM_UPTIME: 98.9%
+                                {i18n.about.labels.motion}
                             </div>
                         </div>
                         
                         <!-- Skills Grid -->
                         <div class="bg-surface border-border-thick border-primary p-8">
-                            <div class="font-mono-label text-on-surface-variant mb-6 border-l-2 border-primary pl-2 inline-block">_SKILL_TREE.INI</div>
+                            <div class="font-mono-label text-on-surface-variant mb-6 border-l-2 border-primary pl-2 inline-block">{i18n.about.labels.skills}</div>
                             
                             <div class="mb-4">
-                                <h3 class="font-mono-label text-primary mb-3"># DEV_MODULES</h3>
+                                <h3 class="font-mono-label text-primary mb-3">{i18n.about.labels.dev}</h3>
                                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                     {i18n.about.devSkills.map(skill => (
                                         <div class="bg-surface-container-high border-border-thin border-primary text-on-surface font-mono-label p-3 text-center uppercase hover:bg-primary hover:text-background transition-colors cursor-crosshair">{skill}</div>
@@ -228,7 +228,7 @@ LATENCY: 12ms
                             </div>
 
                             <div class="mt-8">
-                                <h3 class="font-mono-label text-on-surface mb-3"># UX_MODULES</h3>
+                                <h3 class="font-mono-label text-on-surface mb-3">{i18n.about.labels.ux}</h3>
                                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                     {i18n.about.uxSkills.map(skill => (
                                         <div class="bg-surface-container-high border-border-thin border-on-surface text-on-surface font-mono-label p-3 text-center uppercase hover:bg-on-surface hover:text-background transition-colors cursor-crosshair">{skill}</div>

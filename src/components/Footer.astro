@@ -6,7 +6,7 @@ import Logo from './Logo.astro';
     <div class="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
     <div class="w-full px-gutter py-12 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
         <div class="w-full md:flex-1 flex justify-center md:justify-start font-mono-label text-mono-label text-on-surface-variant uppercase text-center md:text-left">
-            [ STATUS: ONLINE ] [ SEC_LEVEL: 04 ]
+            [ OMNIA MUTANTUR, NIHIL INTERIT ]
         </div>
         <div class="w-full md:flex-1 flex justify-center items-center gap-2 font-mono-label text-mono-label text-on-surface-variant uppercase">
             © <span id="current-year"></span> <Logo class="w-6 h-6 inline-block text-on-surface fill-current" /> ALL RIGHTS RESERVED.
@@ -29,5 +29,8 @@ import Logo from './Logo.astro';
 </footer>
 
 <script is:inline>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    document.addEventListener('astro:page-load', () => {
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+    });
 </script>
