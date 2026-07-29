@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 
+export const prerender = false;
+
 // Inicializar cliente de Resend con la variable de entorno
 const resend = new Resend(process.env.RESEND_API_KEY || import.meta.env.RESEND_API_KEY);
 
