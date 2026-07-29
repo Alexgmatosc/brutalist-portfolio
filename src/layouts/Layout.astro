@@ -10,6 +10,7 @@ const {
     description = 'Portfolio of Alex Matos, Full Stack Web Developer and UX Designer.'
 } = Astro.props;
 import '../global.css';
+import Analytics from '@vercel/analytics/astro';
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -50,5 +51,6 @@ import '../global.css';
 </head>
 <body class="bg-background font-code-body text-on-surface">
     <slot />
+    <Analytics />
 </body>
 </html>
