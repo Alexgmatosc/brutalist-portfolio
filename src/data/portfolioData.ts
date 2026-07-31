@@ -45,15 +45,17 @@ export const portfolioData = {
             contact: "Contacto"
         },
         contactForm: {
-            name: "[Nombre]",
-            email: "[Email]",
-            message: "[Escribe tu mensaje]",
-            send: "[Enviar]",
-            success: "[ ÉXITO: Mensaje enviado correctamente ]",
-            error: "[ ERROR: No se pudo enviar el mensaje. Inténtalo de nuevo. ]",
-            placeholderEmail: "[hola@ejemplo.com]",
-            statusOpen: "> ABIERTO A NUEVAS PROPUESTAS",
-            statusProtocol: "> COMUNICACIÓN DIRECTA",
+            name: "Nombre",
+            email: "Email",
+            message: "Mensaje",
+            send: "Enviar Mensaje",
+            success: "ÉXITO: Mensaje enviado correctamente",
+            error: "ERROR: No se pudo enviar el mensaje. Inténtalo de nuevo.",
+            placeholderName: "Ej. Alex Matos",
+            placeholderEmail: "hola@ejemplo.com",
+            placeholderMessage: "Cuéntame brevemente sobre tu proyecto o idea...",
+            statusOpen: "ABIERTO A NUEVAS PROPUESTAS",
+            statusProtocol: "COMUNICACIÓN DIRECTA",
             sending: "PROCESANDO...",
             sent: "¡ENVIADO!"
         }
@@ -104,15 +106,17 @@ export const portfolioData = {
             contact: "Contact"
         },
         contactForm: {
-            name: "[Name]",
-            email: "[Email]",
-            message: "[Write your message]",
-            send: "[Send]",
-            success: "[ SUCCESS: Message sent correctly ]",
-            error: "[ ERROR: Message could not be sent. Please try again. ]",
-            placeholderEmail: "[hello@example.com]",
-            statusOpen: "> OPEN TO NEW OPPORTUNITIES",
-            statusProtocol: "> DIRECT COMMUNICATION",
+            name: "Name",
+            email: "Email",
+            message: "Message",
+            send: "Send Message",
+            success: "SUCCESS: Message sent successfully",
+            error: "ERROR: Could not send message. Please try again.",
+            placeholderName: "e.g. Alex Matos",
+            placeholderEmail: "hello@example.com",
+            placeholderMessage: "Briefly tell me about your project or idea...",
+            statusOpen: "OPEN TO NEW PROPOSALS",
+            statusProtocol: "DIRECT COMMUNICATION",
             sending: "PROCESSING...",
             sent: "SENT!"
         }

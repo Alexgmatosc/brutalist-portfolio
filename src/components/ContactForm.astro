@@ -33,7 +33,7 @@ const i18n = getI18n(lang);
             <form id="contact-form" class="flex flex-col gap-8 relative z-10">
                 <div class="flex flex-col gap-2">
                     <label for="name" class="font-mono-label text-on-surface-variant uppercase tracking-widest"><span class="text-primary mr-2">&gt;</span>{i18n.contactForm.name}</label>
-                    <input type="text" name="name" id="name" required class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all" placeholder="[Escribe tu nombre]">
+                    <input type="text" name="name" id="name" required class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all" placeholder={i18n.contactForm.placeholderName}>
                 </div>
                 
                 <div class="flex flex-col gap-2">
@@ -43,7 +43,7 @@ const i18n = getI18n(lang);
                 
                 <div class="flex flex-col gap-2">
                     <label for="message" class="font-mono-label text-on-surface-variant uppercase tracking-widest"><span class="text-primary mr-2">&gt;</span>{i18n.contactForm.message}</label>
-                    <textarea name="message" id="message" required rows="5" class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all resize-none" placeholder="[Escribe tu mensaje aquí...]"></textarea>
+                    <textarea name="message" id="message" required rows="5" class="bg-surface text-on-surface font-code-body p-4 border-2 border-primary focus:border-4 focus:outline-none focus:bg-background transition-all resize-none" placeholder={i18n.contactForm.placeholderMessage}></textarea>
                 </div>
                 
                 <button type="submit" id="submit-btn" class="mt-4 bg-primary hover:bg-surface text-background hover:text-primary border-4 border-primary font-mono-label py-5 uppercase transition-colors text-xl hover:translate-x-1 hover:translate-y-1 flex justify-center items-center gap-3 group">

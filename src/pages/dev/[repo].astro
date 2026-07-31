@@ -15,6 +15,8 @@ export async function getStaticPaths() {
         'stories.io', 
         'homehub', 
         'roomie-detector', 
+        'voice2midi',
+        'workout-dashboard',
         'el-rastro-e-comerce', 
         'brutalist-portfolio',
         '42-ft_Printf', 
@@ -28,6 +30,9 @@ export async function getStaticPaths() {
             const repoRes = await fetch(`https://api.github.com/repos/Alexgmatosc/${name}`, { headers });
             if (repoRes.ok) {
                 repo = await repoRes.json();
+                if (repo.name === 'stories.io' && !repo.description) {
+                    repo.description = "Aplicación web para crear y compartir historias interactivas.";
+                }
             }
         } catch (e) {
             console.error("Error fetching repo details for", name, e);

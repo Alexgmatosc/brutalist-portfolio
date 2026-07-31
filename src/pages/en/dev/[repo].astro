@@ -11,25 +11,33 @@ export async function getStaticPaths() {
     const headers = token 
         ? { 'Authorization': `Bearer ${token}` } 
         : {};
-    try {
-        const res = await fetch('https://api.github.com/users/Alexgmatosc/repos?sort=updated&per_page=6', { headers });
-        if (res.ok) {
-            repos = await res.json();
-        } else {
-            repos = [
-                { name: 'growee-app', description: 'Sistema automatizado de cuidado de plantas.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/growee-app', stargazers_count: 12, forks_count: 3 },
-                { name: 'brutalist-portfolio', description: 'Portafolio personal con temática cyberpunk y brutalista.', language: 'Astro', html_url: 'https://github.com/Alexgmatosc/brutalist-portfolio', stargazers_count: 45, forks_count: 8 },
-                { name: 'terminal-cli', description: 'Interfaz de línea de comandos experimental.', language: 'Go', html_url: 'https://github.com/Alexgmatosc/terminal-cli', stargazers_count: 5, forks_count: 1 }
-            ];
+    const repoNames = [
+        'stories.io', 
+        'homehub', 
+        'roomie-detector', 
+        'voice2midi',
+        'workout-dashboard',
+        'el-rastro-e-comerce', 
+        'brutalist-portfolio',
+        '42-ft_Printf', 
+        '42-Libft', 
+        'get-next-line'
+    ];
+    
+    const paths = await Promise.all(repoNames.map(async (name) => {
+        let repo = { name, description: '', language: '', html_url: `https://github.com/Alexgmatosc/${name}`, stargazers_count: 0, forks_count: 0 };
+        try {
+            const repoRes = await fetch(`https://api.github.com/repos/Alexgmatosc/${name}`, { headers });
+            if (repoRes.ok) {
+                repo = await repoRes.json();
+                if (repo.name === 'stories.io' && !repo.description) {
+                    repo.description = "A web application for creating and sharing interactive stories.";
+                }
+            }
+        } catch (e) {
+            console.error("Error fetching repo details for", name, e);
         }
-    } catch (e) {
-        console.error("Error fetching repos", e);
-        repos = [
-            { name: 'growee-app', description: 'Sistema automatizado de cuidado de plantas.', language: 'TypeScript', html_url: 'https://github.com/Alexgmatosc/growee-app', stargazers_count: 0, forks_count: 0 }
-        ];
-    }
 
-    const paths = await Promise.all(repos.map(async (repo) => {
         let readme = '';
         try {
             const res = await fetch(`https://raw.githubusercontent.com/Alexgmatosc/${repo.name}/main/README.md`, { headers });

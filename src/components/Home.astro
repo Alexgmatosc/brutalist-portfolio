@@ -37,12 +37,18 @@ try {
     };
 
     // Proyectos a recuperar desde GitHub
-    const repoNames = ['stories.io', 'homehub', 'roomie-detector', 'el-rastro-e-comerce', 'brutalist-portfolio'];
+    const repoNames = ['stories.io', 'homehub', 'roomie-detector', 'voice2midi', 'workout-dashboard', 'el-rastro-e-comerce', 'brutalist-portfolio'];
     const fetchedRepos = [];
     for (const name of repoNames) {
         const res = await fetch(`https://api.github.com/repos/Alexgmatosc/${name}`, { headers });
         if (res.ok) {
-            fetchedRepos.push(await res.json());
+            const data = await res.json();
+            if (data.name === 'stories.io' && !data.description) {
+                data.description = lang === 'en' 
+                    ? "A web application for creating and sharing interactive stories." 
+                    : "Aplicación web para crear y compartir historias interactivas.";
+            }
+            fetchedRepos.push(data);
         } else {
             fetchedRepos.push(fallbacks[name]);
         }
